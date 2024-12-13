@@ -10,9 +10,19 @@ function App() {
   const [searchData, setSearchData] = useState('')
 const {users} = useUser()
 
+const scrollToBottom = () =>{
+  setTimeout(() => {
+    window.scrollTo({
+      top:document.body.scrollHeight,
+      behavior:"smooth"
+    })
+  }, 500);
+}
+
   const handleSummary = (profile) =>{
     setSelectedProfile({})
     setSelectedProfile(profile)
+    scrollToBottom()
   }
 
 
@@ -34,7 +44,7 @@ if(searchData) {
 } else {
   setProfiles(users)
 }
-  
+
   }
  
   useEffect(()=>{
@@ -75,9 +85,7 @@ if(searchData) {
             <p className="text-sm text-gray-300 text-center">{profile.description}</p>
             <button
               className={`bg-blue-500 w-fit mt-4 px-2 py-1 sm:px-4 sm:py-2 rounded-lg text-[.7rem] hover:bg-blue-600 transition ${isNaN(Number(profile.address.latitude)) || isNaN(Number(profile.address.longitude)) ? `bg-zinc-400 cursor-not-allowed hover:bg-zinc-500` : `bg-blue-500`} `}
-              // className={`${isNaN(Number(profile.address.latitude)) ? `bg-red-500` : `bg-blue-500`}`}longitude
-              onClick={() => handleSummary(profile)}
-            >
+              onClick={() => handleSummary(profile)}>
               Summary
             </button>
           </div>
